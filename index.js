@@ -5,7 +5,7 @@ import { View, ViewPropTypes } from 'react-native';
 import SimpleMarkdown from 'simple-markdown';
 import styles from './styles';
 
-class Markdown extends Component {
+class RNMarkdown extends Component {
   constructor(props) {
     super(props);
     if (props.enableLightBox && !props.navigator) {
@@ -56,7 +56,7 @@ class Markdown extends Component {
   }
 }
 
-Markdown.propTypes = {
+RNMarkdown.propTypes = {
   enableLightBox: PropTypes.bool,
   onLink: PropTypes.func,
   onImageOpen: PropTypes.func,
@@ -68,9 +68,9 @@ Markdown.propTypes = {
   rules: PropTypes.object,
 };
 
-Markdown.defaultProps = {
+RNMarkdown.defaultProps = {
   styles: styles,
   rules: {}
 }
 
-export default Markdown;
+export default RNMarkdown;

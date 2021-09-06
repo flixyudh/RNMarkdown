@@ -195,8 +195,6 @@ module.exports = function (styles, opts = {}) {
             }
           }
 
-
-
           var content = output(item, state);
           var listItem;
           if (includes(['text', 'paragraph', 'strong'], (head(item) || {}).type) && state.withinList == false) {
