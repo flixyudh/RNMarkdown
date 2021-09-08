@@ -1,6 +1,12 @@
 import { Dimensions, Platform, StyleSheet } from 'react-native';
 
+/**
+ * 
+ */
 export default StyleSheet.create({
+  container:{
+    flex:1,
+  },
   autolink: {
     color: 'blue',
   },
@@ -27,9 +33,6 @@ export default StyleSheet.create({
   bgImageView: {
     flex: 1,
     overflow: 'hidden',
-  },
-  view: {
-    alignSelf: 'stretch',
   },
   codeBlock: {
     fontFamily: Platform.OS === 'ios' ? 'Courier' : 'Monospace',
@@ -84,7 +87,6 @@ export default StyleSheet.create({
     borderRadius: 3,
     borderWidth: 1,
     fontFamily: Platform.OS === 'ios' ? 'Courier' : 'Monospace',
-    fontWeight: 'bold',
   },
   list: {
   },

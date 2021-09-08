@@ -1,8 +1,7 @@
 import { head, includes, map, noop, size, some } from 'lodash';
 import React from 'react';
 import {
-  Image,
-  Text,
+  Image, Linking, Text,
   View
 } from 'react-native';
 import SimpleMarkdown from 'simple-markdown';
@@ -10,7 +9,6 @@ import SimpleMarkdown from 'simple-markdown';
 
 
 module.exports = function (styles, opts = {}) {
-  const navigator = opts.navigator;
 
   const LINK_INSIDE = '(?:\\[[^\\]]*\\]|[^\\]]|\\](?=[^\\[]*\\]))*';
   const LINK_HREF_AND_TITLE =
@@ -21,6 +19,8 @@ module.exports = function (styles, opts = {}) {
         console.log('There has been a problem with this action. ' + error.message);
         throw error;
       });
+    } else {
+      Linking.openURL(target)
     }
   };
   var parseInline = function (parse, content, state) {

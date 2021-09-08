@@ -1,27 +1,41 @@
 import { isArray, isEqual, merge } from 'lodash';
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { View, ViewPropTypes } from 'react-native';
+import { View } from 'react-native';
 import SimpleMarkdown from 'simple-markdown';
 import styles from './styles';
+import { typography } from './utils/typography';
 
-class RNMarkdown extends Component {
+/**
+ * @typedef CustomProps
+ * @type {object}
+ * @property {function} onLoad
+ * @property {object} font
+ * @property {string} font.default
+ * @property {string} font.italic
+ * @property {string} font.bold
+ * @property {import("react-native").ViewStyle} style
+ * 
+ * @typedef {CustomProps} Props
+ */
+/**
+ * @extends {React.PureComponent<Props, {}>}}
+ */
+
+export default class RNMarkdown extends Component {
+  static defaultProps = {
+    font:{}
+  };
+  
   constructor(props) {
     super(props);
-    if (props.enableLightBox && !props.navigator) {
-      throw new Error('props.navigator must be specified when enabling lightbox');
-    }
 
     const opts = {
-      enableLightBox: props.enableLightBox,
-      navigator: props.navigator,
       imageParam: props.imageParam,
       onLink: props.onLink,
-      bgImage: props.bgImage,
-      onImageOpen: props.onImageOpen,
-      onImageClose: props.onImageClose,
       rules: props.rules
     };
+
+    typography(props)
 
     const mergedStyles = merge({}, styles, props.styles);
     var rules = require('./rules')(mergedStyles, opts);
@@ -52,25 +66,6 @@ class RNMarkdown extends Component {
 
     const tree = this.parse(child);
 
-    return <View style={[styles.view, this.props.styles.view]}>{this.renderer(tree)}</View>
+    return <View style={[styles.container, this.props.style]}>{this.renderer(tree)}</View>
   }
 }
-
-RNMarkdown.propTypes = {
-  enableLightBox: PropTypes.bool,
-  onLink: PropTypes.func,
-  onImageOpen: PropTypes.func,
-  onImageClose: PropTypes.func,
-  onLoad: PropTypes.func,
-  styles: PropTypes.shape({
-    view: ViewPropTypes.style,
-  }),
-  rules: PropTypes.object,
-};
-
-RNMarkdown.defaultProps = {
-  styles: styles,
-  rules: {}
-}
-
-export default RNMarkdown;
